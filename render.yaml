@@ -18,16 +18,17 @@ services:
       - key: CORS_ORIGINS
         value: "http://localhost:3000,https://blockbank-frontend.onrender.com,https://blockbank-frontend.netlify.app"
 
-  - type: static
+  - type: web          # ✅ changed from "static" → "web"
     name: blockbank-frontend
-    env: static
+    env: node
     region: oregon
     plan: starter
     buildCommand: |
       cd frontend
       yarn install --frozen-lockfile || npm install
       yarn build || npm run build
-    publishPath: frontend/build
+    startCommand: |
+      npx serve -s frontend/build -l 3000
     envVars:
       - key: REACT_APP_API_BASE_URL
         value: "https://blockbank-ceu2.onrender.com/api"
