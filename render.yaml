@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: blockbank-backend
+    env: python
+    region: oregon
+    plan: starter
+    buildCommand: |
+      pip install -r backend/requirements.txt
+    startCommand: |
+      uvicorn backend.server:app --host 0.0.0.0 --port 8000
+    envVars:
+      - key: MONGO_URL
+        value: "mongodb+srv://blockuser:block1234@cluster0.dcjzsdb.mongodb.net/?appName=Cluster0"
+      - key: DB_NAME
+        value: "bank_blockchain_db"
+      - key: MASTER_KEY
+        value: "super-secret-master-key"
+      - key: CORS_ORIGINS
+        value: "http://localhost:3000,https://blockbank-frontend.onrender.com,https://blockbank-frontend.netlify.app"
+
+  - type: static
+    name: blockbank-frontend
+    env: static
+    region: oregon
+    plan: starter
+    buildCommand: |
+      cd frontend
+      yarn install --frozen-lockfile || npm install
+      yarn build || npm run build
+    publishPath: frontend/build
+    envVars:
+      - key: REACT_APP_API_BASE_URL
+        value: "https://blockbank-ceu2.onrender.com/api"
