@@ -49,14 +49,6 @@ origins = [
     "http://127.0.0.1:3000",
     "https://blockbank-frontend.netlify.app",
 ]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,  # frontend URLs
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 # --- End of CORS block ---
 
 # Create a router with the /api prefix
@@ -847,12 +839,12 @@ async def explain_blockchain():
 
 
 # Include the router in the main app
-app.include_router(api_router)
+origins = os.getenv("CORS_ORIGINS", "").split(",")
 
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=origins if origins != [""] else ["*"],
     allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
     allow_methods=["*"],
     allow_headers=["*"],
 )
