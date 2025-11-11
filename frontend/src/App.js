@@ -44,16 +44,13 @@ const ProtectedRoute = ({ children, requireAdmin = false }) => {
     );
   }
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!user) return <Navigate to="/login" replace />;
 
-  if (requireAdmin && user.role !== 'admin') {
-    return <Navigate to="/dashboard" replace />;
-  }
+  if (requireAdmin && user.role !== 'admin') return <Navigate to="/dashboard" replace />;
 
   return children;
 };
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -104,7 +101,21 @@ function App() {
         <div className="App min-h-screen">
           {user && <Navigation />}
           <Routes>
-            <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Home />} />
+            <Route
+              path="/"
+              element={
+                loading ? (
+                  <div className="min-h-screen flex items-center justify-center">
+                    <div className="text-cyan-400 text-xl">Loading...</div>
+                  </div>
+                ) : user ? (
+                  <Navigate to="/dashboard" />
+                ) : (
+                  <Home />
+                )
+              }
+            />
+
             <Route path="/register" element={!user ? <Register /> : <Navigate to="/dashboard" />} />
             <Route path="/login" element={!user ? <Login /> : <Navigate to="/dashboard" />} />
             <Route
