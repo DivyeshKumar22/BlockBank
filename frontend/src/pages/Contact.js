@@ -114,7 +114,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-200 mb-1">Email</h3>
-                  <p className="text-sm text-slate-400">support@blockbank.com</p>
+                  <p className="text-sm text-slate-400">pdivyeshkumar22@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -123,7 +123,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-slate-200 mb-1">Phone</h3>
-                  <p className="text-sm text-slate-400">+1 (555) 123-4567</p>
+                  <p className="text-sm text-slate-400">+91 6303887901</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -133,9 +133,9 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-slate-200 mb-1">Address</h3>
                   <p className="text-sm text-slate-400">
-                    123 Blockchain Street
+                    i will not say
                     <br />
-                    Crypto City, CC 12345
+                    divyesh kumar (tag)
                   </p>
                 </div>
               </div>
